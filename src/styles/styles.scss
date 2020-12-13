@@ -1,0 +1,168 @@
+@import url("https://fonts.googleapis.com/css2?family=KoHo&display=swap");
+@font-face {
+  font-family: "Digital-Numbers";
+  src: url("Digital-Numbers.ttf.woff") format("woff"),
+    url("Digital-Numbers.ttf.svg#Digital-Numbers") format("svg"),
+    url("Digital-Numbers.ttf.eot"),
+    url("Digital-Numbers.ttf.eot?#iefix") format("embedded-opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+@import url("https://fonts.googleapis.com/css2?family=Homenaje&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+
+body {
+  margin: 0;
+  overflow-x: hidden !important;
+  font-family: "KoHo", sans-serif;
+}
+
+button {
+  outline: none !important;
+}
+
+.column-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.card-row-col {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: 720px) {
+    flex-flow: column nowrap;
+  }
+}
+
+.blur-card {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 10px;
+  padding: 0px 10px 10px 0px;
+  background: radial-gradient(
+    100% 100% at 0% 0%,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
+  backdrop-filter: blur(15px);
+  width: 354px;
+  height: 115px;
+  .blur-card-header {
+    font-family: "KoHo", sans-serif;
+    padding-left: 22px;
+    font-size: 24px;
+  }
+  .blur-card-number-box {
+    align-self: center;
+    width: 310px;
+    height: 54px;
+    background-color: #4f3e2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-box-shadow: 0 7px 4px -6px #bbeed6;
+    -moz-box-shadow: 0 7px 4px -6px #bbeed6;
+    box-shadow: 0 7px 4px -6px #bbeed6 !important;
+    .blur-card-number {
+      span {
+        display: flex;
+        flex-flow: row nowrap;
+      }
+      font-family: "Digital-Numbers";
+      font-size: 36px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 32px;
+      letter-spacing: 0.15em;
+      text-align: left;
+      text-shadow: 0 0 10px #759687, 0 0 20px#bbeed646;
+      color: #bbeed6;
+    }
+  }
+}
+
+.blur-card-number-box {
+  align-self: center;
+  width: 310px;
+  height: 54px;
+  background-color: #4f3e2e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-box-shadow: 0 7px 4px -6px #bbeed6;
+  -moz-box-shadow: 0 7px 4px -6px #bbeed6;
+  box-shadow: 0 7px 4px -6px #bbeed6 !important;
+}
+
+.card-col {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  .warning-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    background-color: #0f0e0e;
+    width: 190px;
+    .warning-text {
+      color: #f61d1d;
+      font-size: 20px;
+      font-family: "VT323", monospace;
+    }
+  }
+  .rebase-button {
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 195px;
+    width: 195px;
+    border-radius: 50%;
+    background-color: #f13f3f;
+    box-shadow: inset 0 -10px 0px 2px #910b0b;
+    border: 2px solid black;
+    transition: 0.1s ease-in-out;
+    &:hover {
+      box-shadow: none;
+    }
+    .rebase-button-text {
+      font-family: "VT323", monospace;
+      font-size: 42px;
+    }
+  }
+}
+
+/*     --button-default-height: 100px;
+// --button-default-font-size: 25px;
+// --button-default-border-radius: 25px;
+// --button-horizontal-padding: 27px;
+// --button-raise-level: 6px;
+// --button-hover-pressure: 1.5;
+// --transform-speed: 0.3s;
+// --button-primary-color: #f62929;
+// --button-primary-color-dark: #891a1a;
+// --button-primary-color-light: #201f1d;
+// --button-primary-color-hover: #f62929;
+// --button-primary-border: 0px solid transparent;
+// --button-secondary-color: #1acb26;
+// --button-secondary-color-dark: #257e2b;
+// --button-secondary-color-light: #222226;
+// --button-secondary-color-hover: #1acb26;
+// --button-secondary-border: none;
+// --button-anchor-color: #d3cd12;
+// --button-anchor-color-dark: #928f20;
+// --button-anchor-color-light: #231f1f;
+// --button-anchor-color-hover: #d3cd12;
+// --button-anchor-border: 0px solid 1px solid transparent */

@@ -3,7 +3,7 @@ import {useCallback} from 'react'
 import useSushi from './useSushi'
 import {useWallet} from 'use-wallet'
 
-import {enter, getXSushiStakingContract} from '../sushi/utils'
+import {enter, getXSushiStakingContract} from '../diesel/utils'
 
 const useEnter = () => {
   const {account} = useWallet()

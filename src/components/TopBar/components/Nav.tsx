@@ -8,36 +8,13 @@ const Nav: React.FC = () => {
       <StyledLink exact activeClassName="active" to="/">
         Home
       </StyledLink>
+      <StyledLink exact activeClassName="active" to="/refinery">
+        Refinery
+      </StyledLink>
       <StyledLink exact activeClassName="active" to="/farms">
-        Menu
+        Oil Wells
       </StyledLink>
-      <StyledLink exact activeClassName="active" to="/staking">
-        Staking
-      </StyledLink>
-      <StyledAbsoluteLink
-        href="https://sushiswap.fi/"
-        target="_blank"
-      >
-        SushiSwap Fi
-      </StyledAbsoluteLink>
-      <StyledAbsoluteLink
-        href="https://lite.sushiswap.fi/#/swap"
-        target="_blank"
-      >
-        SushiSwap Lite
-      </StyledAbsoluteLink>
-      <StyledAbsoluteLink
-        href="https://exchange.sushiswapclassic.org"
-        target="_blank"
-      >
-        Exchange
-      </StyledAbsoluteLink>
-      <StyledAbsoluteLink
-        href="https://docs.sushiswap.fi/"
-        target="_blank"
-      >
-        Help
-      </StyledAbsoluteLink>
+      
     </StyledNav>
   )
 }
@@ -48,16 +25,18 @@ const StyledNav = styled.nav`
 `
 
 const StyledLink = styled(NavLink)`
-  color: ${(props) => props.theme.color.grey[400]};
-  font-weight: 700;
+  color: #bbeed6;
+  /* font-weight: 700; */
+  font-family: Homenaje;
+  font-size: 32px;
   padding-left: ${(props) => props.theme.spacing[3]}px;
   padding-right: ${(props) => props.theme.spacing[3]}px;
   text-decoration: none;
   &:hover {
-    color: ${(props) => props.theme.color.grey[500]};
+    text-shadow: 0 0 10px #759687, 0 0 20px#bbeed646;
   }
   &.active {
-    color: ${(props) => props.theme.color.primary.main};
+    text-shadow: 0 0 10px #759687, 0 0 20px#bbeed646;
   }
   @media (max-width: 400px) {
     padding-left: ${(props) => props.theme.spacing[2]}px;
@@ -66,16 +45,18 @@ const StyledLink = styled(NavLink)`
 `
 
 const StyledAbsoluteLink = styled.a`
-  color: ${(props) => props.theme.color.grey[400]};
-  font-weight: 700;
+  color: #bbeed6;
+  /* font-weight: 700; */
+  font-family: Homenaje;
+  font-size: 32px;
   padding-left: ${(props) => props.theme.spacing[3]}px;
   padding-right: ${(props) => props.theme.spacing[3]}px;
   text-decoration: none;
   &:hover {
-    color: ${(props) => props.theme.color.grey[500]};
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.78);
   }
   &.active {
-    color: ${(props) => props.theme.color.primary.main};
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.78);
   }
   @media (max-width: 400px) {
     padding-left: ${(props) => props.theme.spacing[2]}px;

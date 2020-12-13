@@ -20,9 +20,9 @@ const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
             <Logo />
           </StyledLogoWrapper>
           <Nav />
-          <StyledAccountButtonWrapper>
+          {/* <StyledAccountButtonWrapper>
             <AccountButton />
-          </StyledAccountButtonWrapper>
+          </StyledAccountButtonWrapper> */}
         </StyledTopBarInner>
       </Container>
     </StyledTopBar>
@@ -36,7 +36,10 @@ const StyledLogoWrapper = styled.div`
   }
 `
 
-const StyledTopBar = styled.div``
+const StyledTopBar = styled.div`
+  background-color: #4f3e2e;
+  width: 100vw;
+`
 
 const StyledTopBarInner = styled.div`
   align-items: center;

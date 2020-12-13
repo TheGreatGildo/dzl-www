@@ -101,12 +101,13 @@ interface StyledButtonProps {
 
 const StyledButton = styled.button<StyledButtonProps>`
   align-items: center;
-  background-color: ${props => props.theme.color.grey[200]};
+  cursor: pointer;
+  /* background-color: ${props => props.theme.color.grey[200]};
   border: 0;
   border-radius: 12px;
   box-shadow: ${props => props.boxShadow};
   color: ${props => !props.disabled ? props.color : `${props.color}55`};
-  cursor: pointer;
+  
   display: flex;
   font-size: ${props => props.fontSize}px;
   font-weight: 700;
@@ -119,7 +120,28 @@ const StyledButton = styled.button<StyledButtonProps>`
   width: 100%;
   &:hover {
     background-color: ${props => props.theme.color.grey[100]};
-  }
+  } */
+  margin: 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+  background-color: #f13f3f;
+  box-shadow:         inset 0 -2px 0px 1px #910b0b;
+   border: 2px solid black;
+   transition: 0.1s ease-in-out;
+    &:hover {
+      box-shadow: none;
+      
+    }
+    .rebase-button-text {
+      font-family: "VT323", monospace;
+      font-size: 42px;
+    }
+    font-size: 20px;
+    font-family: "VT323", monospace;
 `
 
 const StyledLink = styled(Link)`

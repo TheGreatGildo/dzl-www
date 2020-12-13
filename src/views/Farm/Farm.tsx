@@ -8,7 +8,7 @@ import Spacer from '../../components/Spacer'
 import useFarm from '../../hooks/useFarm'
 import useRedeem from '../../hooks/useRedeem'
 import useSushi from '../../hooks/useSushi'
-import { getMasterChefContract } from '../../sushi/utils'
+import { getMasterChefContract } from '../../diesel/utils'
 import { getContract } from '../../utils/erc20'
 import Harvest from './components/Harvest'
 import Stake from './components/Stake'
@@ -56,11 +56,12 @@ const Farm: React.FC = () => {
 
   return (
     <>
-      <PageHeader
+      {/* <PageHeader
         icon={icon}
         subtitle={`Deposit ${lpTokenName}  Tokens and earn ${earnTokenName}`}
         title={name}
-      />
+      /> */}
+      <br /><br /><br /><br /><br /><br /><br /><br />
       <StyledFarm>
         <StyledCardsWrapper>
           <StyledCardWrapper>
@@ -77,8 +78,7 @@ const Farm: React.FC = () => {
         </StyledCardsWrapper>
         <Spacer size="lg" />
         <StyledInfo>
-          ⭐️ Every time you stake and unstake LP tokens, the contract will
-          automagically harvest SUSHI rewards for you!
+
         </StyledInfo>
         <Spacer size="md" />
         <StyledLink
@@ -87,12 +87,7 @@ const Farm: React.FC = () => {
         >
           {lpTokenName} Info
         </StyledLink>
-        <StyledLink
-          target="__blank"
-          href={`https://lite.sushiswap.fi/#/migrate`}
-        >
-          UNI to SLP 1 Click Migration
-        </StyledLink>
+
       </StyledFarm>
     </>
   )
@@ -136,12 +131,27 @@ const StyledInfo = styled.h3`
 `
 
 const StyledLink = styled.a`
-  color: ${(props) => props.theme.color.red[500]};
+  color: black;
+  font-family: "KoHo", sans-serif;
+  padding: 1%;
+  background: radial-gradient(
+    100% 100% at 0% 0%,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
+  -moz-box-shadow: rgba(0,0,0,0.3) 0 1px 3px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
+  backdrop-filter: blur(15px);
+  font-size: 20px;
+  font-weight: 700;
   padding-left: ${(props) => props.theme.spacing[3]}px;
   padding-right: ${(props) => props.theme.spacing[3]}px;
   text-decoration: none;
   &:hover {
-    color: ${(props) => props.theme.color.grey[500]};
+    text-shadow: 
+        0 0 10px #759687,
+        0 0 20px#bbeed646;
   }
 `
 

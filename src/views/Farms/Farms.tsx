@@ -25,18 +25,13 @@ const Farms: React.FC = () => {
         {!!account ? (
           <>
             <Route exact path={path}>
-              <PageHeader
-                icon={<img src={chef} height="120" />}
-                subtitle="Earn SUSHI tokens by staking SushiSwap V2 SLP Tokens."
-                title="Select Your Favorite Dishes"
-              />
+              
               <div
                 style={{
                   alignItems: 'center',
                   marginBottom: '2%'
                 }}
               >
-                Note: Current APY includes 2/3rd SUSHI emission that is locked for 6 months.
               </div>
               <FarmCards />
             </Route>
@@ -55,7 +50,7 @@ const Farms: React.FC = () => {
           >
             <Button
               onClick={onPresentWalletProviderModal}
-              text="🔓 Unlock Wallet"
+              text="Connect"
             />
           </div>
         )}

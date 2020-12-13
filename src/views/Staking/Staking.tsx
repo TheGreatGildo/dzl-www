@@ -41,7 +41,7 @@ const Staking: React.FC = () => {
           >
             <Button
               onClick={onPresentWalletProviderModal}
-              text="🔓 Unlock Wallet"
+              text="Connect"
             />
           </div>
         )}

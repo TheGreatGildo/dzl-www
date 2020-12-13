@@ -1,47 +1,48 @@
-import BigNumber from 'bignumber.js'
-import React, { useEffect, useState } from 'react'
-import Countdown, { CountdownRenderProps } from 'react-countdown'
-import styled, { keyframes } from 'styled-components'
-import { useWallet } from 'use-wallet'
-import Button from '../../../components/Button'
-import Card from '../../../components/Card'
-import CardContent from '../../../components/CardContent'
-import CardIcon from '../../../components/CardIcon'
-import Loader from '../../../components/Loader'
-import Spacer from '../../../components/Spacer'
-import { Farm } from '../../../contexts/Farms'
+import BigNumber from "bignumber.js";
+import React, { useEffect, useState } from "react";
+import Countdown, { CountdownRenderProps } from "react-countdown";
+import styled, { keyframes } from "styled-components";
+import { useWallet } from "use-wallet";
+import Button from "../../../components/Button";
+import Card from "../../../components/Card";
+import CardAccent from "../../../components/CardAccent";
+import CardContent from "../../../components/CardContent";
+import CardIcon from "../../../components/CardIcon";
+import Loader from "../../../components/Loader";
+import Spacer from "../../../components/Spacer";
+import { Farm } from "../../../contexts/Farms";
 import useAllStakedValue, {
   StakedValue,
-} from '../../../hooks/useAllStakedValue'
-import useFarms from '../../../hooks/useFarms'
-import useSushi from '../../../hooks/useSushi'
-import { getEarned, getMasterChefContract } from '../../../sushi/utils'
-import { bnToDec } from '../../../utils'
+} from "../../../hooks/useAllStakedValue";
+import useFarms from "../../../hooks/useFarms";
+import useSushi from "../../../hooks/useSushi";
+import { getEarned, getMasterChefContract } from "../../../diesel/utils";
+import { bnToDec } from "../../../utils";
 
 interface FarmWithStakedValue extends Farm, StakedValue {
-  apy: BigNumber
+  apy: BigNumber;
 }
 
 const FarmCards: React.FC = () => {
-  const [farms] = useFarms()
-  const { account } = useWallet()
-  const stakedValue = useAllStakedValue()
+  const [farms] = useFarms();
+  const { account } = useWallet();
+  const stakedValue = useAllStakedValue();
 
   const sushiIndex = farms.findIndex(
-    ({ tokenSymbol }) => tokenSymbol === 'SUSHI',
-  )
+    ({ tokenSymbol }) => tokenSymbol === "SUSHI"
+  );
 
   const sushiPrice =
     sushiIndex >= 0 && stakedValue[sushiIndex]
       ? stakedValue[sushiIndex].tokenPriceInWeth
-      : new BigNumber(0)
+      : new BigNumber(0);
 
-  const BLOCKS_PER_YEAR = new BigNumber(2372500)
-  const SUSHI_PER_BLOCK = new BigNumber(70)
+  const BLOCKS_PER_YEAR = new BigNumber(2372500);
+  const SUSHI_PER_BLOCK = new BigNumber(70);
 
   if (stakedValue[0] != undefined) {
-    console.log(stakedValue[0].poolWeight.toString())
-    console.log(stakedValue[0].totalWethValue.toString())
+    console.log(stakedValue[0].poolWeight.toString());
+    console.log(stakedValue[0].totalWethValue.toString());
   }
 
   const rows = farms.reduce<FarmWithStakedValue[][]>(
@@ -57,17 +58,17 @@ const FarmCards: React.FC = () => {
               .times(3)
               .div(stakedValue[i].totalWethValue)
           : null,
-      }
-      const newFarmRows = [...farmRows]
+      };
+      const newFarmRows = [...farmRows];
       if (newFarmRows[newFarmRows.length - 1].length === 3) {
-        newFarmRows.push([farmWithStakedValue])
+        newFarmRows.push([farmWithStakedValue]);
       } else {
-        newFarmRows[newFarmRows.length - 1].push(farmWithStakedValue)
+        newFarmRows[newFarmRows.length - 1].push(farmWithStakedValue);
       }
-      return newFarmRows
+      return newFarmRows;
     },
-    [[]],
-  )
+    [[]]
+  );
 
   return (
     <StyledCards>
@@ -84,91 +85,137 @@ const FarmCards: React.FC = () => {
         ))
       ) : (
         <StyledLoadingWrapper>
-          <Loader text="Cooking the rice ..." />
+          <Loader text="Preparing the Drill..." />
         </StyledLoadingWrapper>
       )}
     </StyledCards>
-  )
-}
+  );
+};
 
 interface FarmCardProps {
-  farm: FarmWithStakedValue
+  farm: FarmWithStakedValue;
 }
 
 const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
-  const [startTime, setStartTime] = useState(0)
-  const [harvestable, setHarvestable] = useState(0)
+  const [startTime, setStartTime] = useState(0);
+  const [harvestable, setHarvestable] = useState(0);
 
-  const { account } = useWallet()
-  const { lpTokenAddress } = farm
-  const sushi = useSushi()
+  const { account } = useWallet();
+  const { lpTokenAddress } = farm;
+  const sushi = useSushi();
 
   const renderer = (countdownProps: CountdownRenderProps) => {
-    const { hours, minutes, seconds } = countdownProps
-    const paddedSeconds = seconds < 10 ? `0${seconds}` : seconds
-    const paddedMinutes = minutes < 10 ? `0${minutes}` : minutes
-    const paddedHours = hours < 10 ? `0${hours}` : hours
+    const { hours, minutes, seconds } = countdownProps;
+    const paddedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+    const paddedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+    const paddedHours = hours < 10 ? `0${hours}` : hours;
     return (
-      <span style={{ width: '100%' }}>
+      <span style={{ width: "100%" }}>
         {paddedHours}:{paddedMinutes}:{paddedSeconds}
       </span>
-    )
-  }
+    );
+  };
 
   useEffect(() => {
     async function fetchEarned() {
-      if (sushi) return
+      if (sushi) return;
       const earned = await getEarned(
         getMasterChefContract(sushi),
         lpTokenAddress,
-        account,
-      )
-      setHarvestable(bnToDec(earned))
+        account
+      );
+      setHarvestable(bnToDec(earned));
     }
     if (sushi && account) {
-      fetchEarned()
+      fetchEarned();
     }
-  }, [sushi, lpTokenAddress, account, setHarvestable])
+  }, [sushi, lpTokenAddress, account, setHarvestable]);
 
-  const poolActive = true // startTime * 1000 - Date.now() <= 0
+  const poolActive = true; // startTime * 1000 - Date.now() <= 0
 
   return (
     <StyledCardWrapper>
-      {farm.tokenSymbol === 'SUSHI' && <StyledCardAccent />}
-      <Card>
-        <CardContent>
-          <StyledContent>
-            <CardIcon>{farm.icon}</CardIcon>
-            <StyledTitle>{farm.name}</StyledTitle>
-            <StyledDetails>
-              <StyledDetail>Deposit {farm.lpToken}</StyledDetail>
-              <StyledDetail>Earn {farm.earnToken.toUpperCase()}</StyledDetail>
-            </StyledDetails>
-            <Spacer />
-            <Button
-              disabled={!poolActive}
-              text={poolActive ? 'Select' : undefined}
-              to={`/farms/${farm.id}`}
-            >
-              {!poolActive && (
-                <Countdown
-                  date={new Date(startTime * 1000)}
-                  renderer={renderer}
-                />
-              )}
-            </Button>
-            <StyledInsight>
-              <span>APY</span>
-              <span>
-                {farm.apy
-                  ? `${farm.apy
-                      .times(new BigNumber(100))
-                      .toNumber()
-                      .toLocaleString('en-US')
-                      .slice(0, -1)}%`
-                  : 'Loading ...'}
-              </span>
-              {/* <span>
+      {farm.tokenSymbol === "DZL" ? (
+        <>
+          <CardAccent>
+            <CardContent>
+              <StyledContent>
+                {/* <CardIcon>{farm.icon}</CardIcon> */}
+                <StyledTitle>{farm.name}</StyledTitle>
+                <StyledDetails>
+                  <StyledDetail>Deposit {farm.lpToken}</StyledDetail>
+                  <StyledDetail>
+                    Earn {farm.earnToken.toUpperCase()}
+                  </StyledDetail>
+                </StyledDetails>
+                <Spacer />
+                <Button
+                  disabled={!poolActive}
+                  text={poolActive ? "Select" : undefined}
+                  to={`/farms/${farm.id}`}
+                >
+                  {!poolActive && (
+                    <Countdown
+                      date={new Date(startTime * 1000)}
+                      renderer={renderer}
+                    />
+                  )}
+                </Button>
+                <StyledInsight>
+                  <span>APY</span>
+                  <span>
+                    {farm.apy
+                      ? `${farm.apy
+                          .times(new BigNumber(100))
+                          .toNumber()
+                          .toLocaleString("en-US")
+                          .slice(0, -1)}%`
+                      : "Loading ..."}
+                  </span>
+                </StyledInsight>
+              </StyledContent>
+            </CardContent>
+          </CardAccent>
+          <br />
+        </>
+      ) : (
+        <>
+          <Card>
+            <CardContent>
+              <StyledContent>
+                {/* <CardIcon>{farm.icon}</CardIcon> */}
+                <StyledTitle>{farm.name}</StyledTitle>
+                <StyledDetails>
+                  <StyledDetail>Deposit {farm.lpToken}</StyledDetail>
+                  <StyledDetail>
+                    Earn {farm.earnToken.toUpperCase()}
+                  </StyledDetail>
+                </StyledDetails>
+                <Spacer />
+                <Button
+                  disabled={!poolActive}
+                  text={poolActive ? "Select" : undefined}
+                  to={`/farms/${farm.id}`}
+                >
+                  {!poolActive && (
+                    <Countdown
+                      date={new Date(startTime * 1000)}
+                      renderer={renderer}
+                    />
+                  )}
+                </Button>
+                <StyledInsight>
+                  <span>APY</span>
+                  <span>
+                    {farm.apy
+                      ? `${farm.apy
+                          .times(new BigNumber(100))
+                          .toNumber()
+                          .toLocaleString("en-US")
+                          .slice(0, -1)}%`
+                      : "Loading ..."}
+                  </span>
+                  {/* <span>
                 {farm.tokenAmount
                   ? (farm.tokenAmount.toNumber() || 0).toLocaleString('en-US')
                   : '-'}{' '}
@@ -180,13 +227,15 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
                   : '-'}{' '}
                 ETH
               </span> */}
-            </StyledInsight>
-          </StyledContent>
-        </CardContent>
-      </Card>
+                </StyledInsight>
+              </StyledContent>
+            </CardContent>
+          </Card>
+        </>
+      )}
     </StyledCardWrapper>
-  )
-}
+  );
+};
 
 const RainbowLight = keyframes`
 
@@ -199,7 +248,7 @@ const RainbowLight = keyframes`
 	100% {
 		background-position: 0% 50%;
 	}
-`
+`;
 
 const StyledCardAccent = styled.div`
   background: linear-gradient(
@@ -226,81 +275,89 @@ const StyledCardAccent = styled.div`
   bottom: -2px;
   left: -2px;
   z-index: -1;
-`
+`;
 
 const StyledCards = styled.div`
   width: 900px;
   @media (max-width: 768px) {
     width: 100%;
   }
-`
+`;
 
 const StyledLoadingWrapper = styled.div`
   align-items: center;
   display: flex;
   flex: 1;
   justify-content: center;
-`
+`;
 
 const StyledRow = styled.div`
   display: flex;
   margin-bottom: ${(props) => props.theme.spacing[4]}px;
   flex-flow: row wrap;
+  justify-content: center;
   @media (max-width: 768px) {
     width: 100%;
     flex-flow: column nowrap;
     align-items: center;
   }
-`
+`;
 
 const StyledCardWrapper = styled.div`
   display: flex;
   width: calc((900px - ${(props) => props.theme.spacing[4]}px * 2) / 3);
   position: relative;
-`
+`;
 
 const StyledTitle = styled.h4`
-  color: ${(props) => props.theme.color.grey[600]};
+  color: black;
+  font-family: "KoHo", sans-serif;
   font-size: 24px;
   font-weight: 700;
   margin: ${(props) => props.theme.spacing[2]}px 0 0;
   padding: 0;
-`
+`;
 
 const StyledContent = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-`
+`;
 
 const StyledSpacer = styled.div`
   height: ${(props) => props.theme.spacing[4]}px;
   width: ${(props) => props.theme.spacing[4]}px;
-`
+`;
 
 const StyledDetails = styled.div`
   margin-top: ${(props) => props.theme.spacing[2]}px;
   text-align: center;
-`
+`;
 
 const StyledDetail = styled.div`
-  color: ${(props) => props.theme.color.grey[500]};
-`
+  color: black;
+  font-family: "KoHo", sans-serif;
+  font-size: 18px;
+`;
 
 const StyledInsight = styled.div`
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
-  border-radius: 8px;
-  background: #fffdfa;
-  color: #aa9584;
+  background-color: #4f3e2e;
+  text-shadow: 0 0 10px #759687, 0 0 20px#bbeed646;
+
+  color: #bbeed6;
+  font-family: "Digital-Numbers";
   width: 100%;
   margin-top: 12px;
   line-height: 32px;
-  font-size: 13px;
-  border: 1px solid #e6dcd5;
+  font-size: 20px;
+  -webkit-box-shadow: 0 7px 4px -6px #bbeed6;
+  -moz-box-shadow: 0 7px 4px -6px #bbeed6;
+  box-shadow: 0 7px 4px -6px #bbeed6 !important;
   text-align: center;
   padding: 0 12px;
-`
+`;
 
-export default FarmCards
+export default FarmCards;

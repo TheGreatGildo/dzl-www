@@ -27,23 +27,35 @@ const Input: React.FC<InputProps> = ({
 
 const StyledInputWrapper = styled.div`
   align-items: center;
-  background-color: ${props => props.theme.color.grey[200]};
-  border-radius: ${props => props.theme.borderRadius}px;
-  box-shadow: inset 4px 4px 8px ${props => props.theme.color.grey[300]},
-    inset -6px -6px 12px ${props => props.theme.color.grey[100]};
+  background-color: #4f3e2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-box-shadow: 0 7px 4px -6px #bbeed6;
+    -moz-box-shadow: 0 7px 4px -6px #bbeed6;
+         box-shadow: 0 7px 4px -6px #bbeed6!important;
   display: flex;
-  height: 72px;
+  height: 52px;
+  
   padding: 0 ${props => props.theme.spacing[3]}px;
 `
 
 const StyledInput = styled.input`
   background: none;
+  font-family: "Digital-Numbers";
   border: 0;
-  color: ${props => props.theme.color.grey[600]};
-  font-size: 18px;
+  text-shadow: 
+        0 0 10px #759687,
+        0 0 20px#bbeed646;
+
+
+      color: #bbeed6;
+  font-size: 24px;
   flex: 1;
-  height: 56px;
+  height: 48px;
   margin: 0;
+  position: relative;
+  left: 5px;
   padding: 0;
   outline: none;
 `

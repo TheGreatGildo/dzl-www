@@ -38,12 +38,13 @@ const StyledNav = styled.nav`
 `
 
 const StyledLink = styled.a`
-  color: ${(props) => props.theme.color.grey[400]};
+font-family: "KoHo", sans-serif;
+  color: ${(props) => props.theme.color.grey[300]};
   padding-left: ${(props) => props.theme.spacing[3]}px;
   padding-right: ${(props) => props.theme.spacing[3]}px;
   text-decoration: none;
   &:hover {
-    color: ${(props) => props.theme.color.grey[500]};
+    text-shadow: 0 0 10px #759687, 0 0 20px#bbeed646;
   }
 `
 

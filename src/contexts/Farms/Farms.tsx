@@ -4,8 +4,8 @@ import { useWallet } from 'use-wallet'
 import useSushi from '../../hooks/useSushi'
 
 import { bnToDec } from '../../utils'
-import { getMasterChefContract, getEarned } from '../../sushi/utils'
-import { getFarms } from '../../sushi/utils'
+import { getMasterChefContract, getEarned } from '../../diesel/utils'
+import { getFarms } from '../../diesel/utils'
 
 import Context from './context'
 import { Farm } from './types'

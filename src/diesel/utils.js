@@ -22,12 +22,18 @@ export const getSushiAddress = (sushi) => {
 export const getWethContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.weth
 }
+export const getDieselAddress = (diesel) => {
+  return diesel && diesel.dieselAddress
+}
 
 export const getMasterChefContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.masterChef
 }
 export const getSushiContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.sushi
+}
+export const getDieselContract = (diesel) => {
+  return diesel && diesel.contracts && diesel.contracts.diesel
 }
 
 export const getXSushiStakingContract = (sushi) => {
@@ -57,7 +63,7 @@ export const getFarms = (sushi) => {
           tokenAddress,
           tokenSymbol,
           tokenContract,
-          earnToken: 'sushi',
+          earnToken: 'dzl',
           earnTokenAddress: sushi.contracts.sushi.options.address,
           icon,
         }),

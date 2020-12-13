@@ -17,6 +17,7 @@ const Icon: React.FC<IconProps> = ({ children, color, size = 24 }) => (
 )
 
 const StyledIcon = styled.div`
+color: black;
 `
 
 export default Icon

@@ -6,5 +6,6 @@ BigNumber.config({
   DECIMAL_PLACES: 80,
 })
 
+export { Diesel } from './Diesel.js'
 export { Sushi } from './Sushi.js'
 export { Web3, BigNumber }

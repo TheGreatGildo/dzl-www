@@ -10,7 +10,7 @@ import Balances from './components/Balances'
 
 const Home: React.FC = () => {
   return (
-    <Page>
+    <>
       <PageHeader
         icon={<img src={chef} height={120} />}
         title="MasterChef is Ready"
@@ -28,7 +28,7 @@ const Home: React.FC = () => {
       >
         <Button text="🔪 See the Menu" to="/farms" variant="secondary" />
       </div>
-    </Page>
+    </>
   )
 }
 

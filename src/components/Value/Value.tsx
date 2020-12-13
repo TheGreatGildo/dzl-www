@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from 'react'
-import CountUp from 'react-countup'
+import React, { useState, useEffect } from "react";
+import CountUp from "react-countup";
 
-import styled from 'styled-components'
+import styled from "styled-components";
 
 interface ValueProps {
-  value: string | number
-  decimals?: number
+  value: string | number;
+  decimals?: number;
 }
 
 const Value: React.FC<ValueProps> = ({ value, decimals }) => {
-  const [start, updateStart] = useState(0)
-  const [end, updateEnd] = useState(0)
+  const [start, updateStart] = useState(0);
+  const [end, updateEnd] = useState(0);
 
   useEffect(() => {
-    if (typeof value === 'number') {
-      updateStart(end)
-      updateEnd(value)
+    if (typeof value === "number") {
+      updateStart(end);
+      updateEnd(value);
     }
-  }, [value])
+  }, [value]);
 
   return (
     <StyledValue>
-      {typeof value == 'string' ? (
+      {typeof value == "string" ? (
         value
       ) : (
         <CountUp
@@ -35,14 +35,26 @@ const Value: React.FC<ValueProps> = ({ value, decimals }) => {
         />
       )}
     </StyledValue>
-  )
-}
+  );
+};
 
 const StyledValue = styled.div`
-  font-family: 'Roboto Mono', monospace;
-  color: ${(props) => props.theme.color.grey[600]};
-  font-size: 36px;
-  font-weight: 700;
-`
+  background-color: #4f3e2e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-box-shadow: 0 7px 4px -6px #bbeed6;
+  -moz-box-shadow: 0 7px 4px -6px #bbeed6;
+  box-shadow: 0 7px 4px -6px #bbeed6 !important;
+  font-family: "Digital-Numbers";
+  text-shadow: 0 0 10px #759687, 0 0 20px#bbeed646;
+  padding: 1px 5px;
+  color: #bbeed6;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0.15em;
+`;
 
-export default Value
+export default Value;
