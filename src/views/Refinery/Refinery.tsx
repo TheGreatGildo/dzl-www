@@ -128,10 +128,10 @@ const Refinery: React.FC = () => {
           <div className="warning-box">
             <div className="warning-text">DO NOT PRESS THIS BUTTON</div>
           </div>
-          <div className="rebase-button">
-            <div className="rebase-button-text" onClick={ async () => {
+          <div className="rebase-button" onClick={ async () => {
                 onRebase()
-            }}>REBASE</div>
+            }}>
+            <div className="rebase-button-text" >REBASE</div>
           </div>
         </div>
       </div>

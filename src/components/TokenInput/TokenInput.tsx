@@ -45,8 +45,7 @@ const TokenInput: React.FC<TokenInputProps> = ({
 */
 
 const StyledTokenInput = styled.div`
-
-
+  width: 94.5%;
 `
 
 const StyledSpacer = styled.div`
@@ -67,7 +66,7 @@ const StyledMaxText = styled.div`
   font-size: 16px;
   font-weight: 700;
   height: 44px;
-  justify-content: flex-end;
+  justify-content: flex-start;
 `
 
 const StyledTokenSymbol = styled.span`

@@ -55,7 +55,7 @@ const StyledInput = styled.input`
   height: 48px;
   margin: 0;
   position: relative;
-  left: 5px;
+  left: 12px;
   padding: 0;
   outline: none;
 `
